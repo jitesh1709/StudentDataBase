@@ -9,14 +9,14 @@ import { User } from '../../user';
   styleUrls: ['./create-update.component.css']
 })
 export class CreateUpdateComponent implements OnInit {
-  private user:User;
-  constructor(private userService : UserService,private router:Router) { }
+  private user: User;
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.user = this.userService.getter();
   }
-  createOrUpdate(){
-    if(this.user._id == undefined){
+  createOrUpdate() {
+    if (this.user._id === undefined) {
     this.userService.createUser(this.user).subscribe(
       data => {
         console.log(data);
@@ -25,7 +25,7 @@ export class CreateUpdateComponent implements OnInit {
       error => {
         console.log(error);
       });
-    }else{
+    } else {
       this.userService.updateUser(this.user).subscribe(
         data => {
           console.log(data);
