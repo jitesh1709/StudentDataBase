@@ -35,8 +35,6 @@ export class ListComponent implements OnInit {
     this.userService.setter(user);
     this.router.navigate(['/createUpdate']);
   }
-  // doDelete(user){
-  // }
   doDelete(user) {
     if (confirm('Are you sure to delete this record ?') === true) {
       this.userService.deleteUser(user._id).subscribe(

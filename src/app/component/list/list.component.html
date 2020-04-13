@@ -6,21 +6,19 @@
     <table class="table table-hover">
       <thead class="">
         <tr>
-          <!-- <th>ID</th> -->
           <th>Username</th>
-          <th>Address</th>
-          <th>Contact</th>
-          <th>Email</th>
+          <th>Maths</th>
+          <th>Physics</th>
+          <th>Chemistry</th>
           <th>Operations</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let user of users">
-          <!-- <td>{{user._id}}</td> -->
           <td> {{user.username}} </td>
-          <td>{{user.address}}</td>
-          <td> {{user.contact}} </td>
-          <td> {{user.email}} </td>
+          <td>{{user.maths}}</td>
+          <td> {{user.physics}} </td>
+          <td> {{user.chemistry}} </td>
           <td><button  class="btn btn-danger" (click)="doDelete(user)">Delete</button>&nbsp;
             <button class="btn btn-primary" (click)="doUpdate(user)">Update</button></td>
         </tr>
