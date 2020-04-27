@@ -9,6 +9,8 @@ import { User } from '../../user';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+  searchValues: '';
+  filteredUsers: any;
   private users: User[];
   constructor(private userService: UserService, private router: Router) { }
 
@@ -19,6 +21,18 @@ export class ListComponent implements OnInit {
     event.preventDefault();
     this.userService.setter(new User());
     this.router.navigate(['/createUpdate']);
+  }
+  onKey(event: any) { // without type info
+    this.searchValues = event.target.value;
+    console.log(this.searchValues,'inputBox'); 
+    this.filteredUsers = this.users.filter(user => {
+      user.username
+      .toLowerCase()
+      .includes(this.searchValues
+      .toLowerCase())
+    });
+    console.log(this.filteredUsers);
+    
   }
   readUsers() {
     this.userService.readUsers().subscribe(
