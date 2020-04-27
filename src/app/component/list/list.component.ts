@@ -9,7 +9,7 @@ import { User } from '../../user';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  searchValues: '';
+  searchedField: '';
   filteredUsers: any;
   private users: User[];
   constructor(private userService: UserService, private router: Router) { }
@@ -17,38 +17,38 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this.readUsers();
   }
+
   newUser(event: any) {
     event.preventDefault();
     this.userService.setter(new User());
     this.router.navigate(['/createUpdate']);
   }
-  onKey(event: any) { // without type info
-    this.searchValues = event.target.value;
-    console.log(this.searchValues,'inputBox'); 
+
+  onKey(event: any) {
+    this.searchedField = event.target.value;
     this.filteredUsers = this.users.filter(user => {
-      user.username
-      .toLowerCase()
-      .includes(this.searchValues
-      .toLowerCase())
+      return user.username.toLowerCase().includes(this.searchedField.toLowerCase());
     });
-    console.log(this.filteredUsers);
-    
   }
+
   readUsers() {
     this.userService.readUsers().subscribe(
       data => {
         console.log(data);
         this.users = data['msg'];
+        this.filteredUsers = this.users;
       },
       error => {
         console.log(error);
       }
     );
   }
+
   doUpdate(user) {
     this.userService.setter(user);
     this.router.navigate(['/createUpdate']);
   }
+
   doDelete(user) {
     if (confirm('Are you sure to delete this record ?') === true) {
       this.userService.deleteUser(user._id).subscribe(
